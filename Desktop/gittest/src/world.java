@@ -7,6 +7,6 @@ public class world {
         this.name = name;
     }
     public void say(){
-        System.out.println("Hello, from " + this.name);
+        System.out.println("Hey, from " + this.name);
     }
 }
