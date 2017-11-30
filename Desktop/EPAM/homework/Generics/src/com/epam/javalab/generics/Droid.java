@@ -30,6 +30,5 @@ public class Droid {
 
     @Override
     public String toString() {
-        return String.format("Droid %s with %s health", name, health);
-    }
+        return String.format("Droid %s", name);}
 }
