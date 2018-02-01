@@ -20,7 +20,7 @@ public class GoogleTest {
 
     @BeforeMethod
     public void setupDriver() {
-        webDriver = WebDriverFactory.getInstance( "chrome" );
+        webDriver = WebDriverFactory.getInstance( "firefox" );
         webDriver.manage().timeouts().implicitlyWait( 45, TimeUnit.SECONDS );
     }
 

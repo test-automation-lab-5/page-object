@@ -3,6 +3,7 @@ package com.epam.lab;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class WebDriverFactory {
     private static final String CHROME = "chrome";
@@ -15,8 +16,9 @@ public class WebDriverFactory {
             System.setProperty( "webdriver.chrome.driver", "src/resourses/chromedriver.exe" );
             webDriver = new ChromeDriver();
         } else if (FIREFOX.equals( browser )) {
-            System.setProperty( "webdriver.gecko.driver", "src/resourses/geckodriver.exe" );
-            webDriver = new FirefoxDriver();
+            DesiredCapabilities capabilitiesFirefox = new DesiredCapabilities();
+            capabilitiesFirefox.setCapability("marionette", false);
+            webDriver = new FirefoxDriver(capabilitiesFirefox);
         } else throw new IllegalArgumentException( "Invalid browser property set in configuration file" );
         return webDriver;
     }
