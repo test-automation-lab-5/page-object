@@ -24,6 +24,13 @@ public class MainPage {
     private WebElement ClickDeleteIcon;
     @FindBy(name= "ok")
     private WebElement okmessage;
+    @FindBy(xpath = "//span[@class='bofITb']")
+    private WebElement movedMessage;
+
+    public String getMovedMessage() {
+        String message = movedMessage.getText();
+        return message;
+    }
     public MainPage(WebDriver driver){
         PageFactory.initElements(driver,this);
     }
@@ -57,8 +64,6 @@ public class MainPage {
     }
     public void clickDelete(){
         ClickDeleteIcon.click();
-    }
-    public void clickOKButton(){
         okmessage.click();
     }
 }
