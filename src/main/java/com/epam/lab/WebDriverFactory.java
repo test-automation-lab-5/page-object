@@ -11,9 +11,11 @@ public class WebDriverFactory {
 
     public static WebDriver getInstance(String browser) {
         WebDriver webDriver;
+        ReadProperties data = new ReadProperties();
+        data.readPropertiesFile( "prop.properties" );
 
         if (CHROME.equals( browser )) {
-            System.setProperty( "webdriver.chrome.driver", "src/resourses/chromedriver.exe" );
+            System.setProperty( data.getPropertyValue( "chrome_driver" ), data.getPropertyValue( "chrome_path" ) );
             webDriver = new ChromeDriver();
         } else if (FIREFOX.equals( browser )) {
             DesiredCapabilities capabilitiesFirefox = new DesiredCapabilities();
