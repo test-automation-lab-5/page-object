@@ -27,17 +27,16 @@ public class TestTask2 {
     public static void open() {
         System.setProperty("webdriver.chrome.driver",DRIVER_PATH);
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     @Test
     public void simpleLoginTest() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.get(URL);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.typeLogin(EMAIL);
-        wait.until(ExpectedConditions.elementToBeClickable(loginPage.getPassword()));
+        (new WebDriverWait(driver, 30))
+                .until(ExpectedConditions.elementToBeClickable(loginPage.getPassword()));
         loginPage.typePassword(PASSWORD);
-
         MainPage mainPage = new MainPage(driver);
         mainPage.clickmessage();
         mainPage.typeReseiver(ADDRESSE);
