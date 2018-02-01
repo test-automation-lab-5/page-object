@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MailboxPage extends AbstractPage {
     @FindBy(xpath = "//div[@role='main']//div[@role='checkbox']")
@@ -26,10 +27,8 @@ public class MailboxPage extends AbstractPage {
 
     public List<String> checkNVisibleCheckboxes(int n) {
         waitUntilBeClickable(visibleCheckbox);
-        List<String> idList = getIdsOfFirstNVisibleMails(n);
-        for (int i = 0; i < n && i < visibleCheckboxes.size(); i++)
-            visibleCheckboxes.get(i).click();
-        return idList;
+        visibleCheckboxes.stream().limit(Math.min(n,visibleCheckboxes.size())).forEach(WebElement::click);
+        return getIdsOfFirstNVisibleMails(n);
     }
 
     public void waitPageLoad() {
@@ -49,10 +48,6 @@ public class MailboxPage extends AbstractPage {
     }
 
     public List<String> getIdsOfFirstNVisibleMails(int n) {
-        List<String> idList = new ArrayList<>();
-        for (int i = 0; i < n && i < visibleCheckboxes.size(); i++) {
-            idList.add(visibleCheckboxes.get(i).getAttribute("id"));
-        }
-        return idList;
+        return visibleCheckboxes.stream().limit(Math.min(n,visibleCheckboxes.size())).map(webElement-> webElement.getAttribute("id")).collect(Collectors.toList());
     }
 }
