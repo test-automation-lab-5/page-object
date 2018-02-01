@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,12 +26,13 @@ public class MailboxPage extends AbstractPage {
 
     public List<String> checkNVisibleCheckboxes(int n) {
         waitUntilBeClickable(visibleCheckbox);
-        visibleCheckboxes.stream().limit(Math.min(n,visibleCheckboxes.size())).forEach(WebElement::click);
+        visibleCheckboxes.stream().limit(Math.min(n, visibleCheckboxes.size())).forEach(WebElement::click);
         return getIdsOfFirstNVisibleMails(n);
     }
 
-    public void waitPageLoad() {
-        waitPageLoad("https://mail.google.com/mail/#inbox");
+    public void waitMailboxPageLoad() {
+        waitPageRedirectToURL("https://mail.google.com/mail/#inbox");
+        waitPageLoad();
     }
 
     public void clickVisibleDeleteButton() {
@@ -48,6 +48,6 @@ public class MailboxPage extends AbstractPage {
     }
 
     public List<String> getIdsOfFirstNVisibleMails(int n) {
-        return visibleCheckboxes.stream().limit(Math.min(n,visibleCheckboxes.size())).map(webElement-> webElement.getAttribute("id")).collect(Collectors.toList());
+        return visibleCheckboxes.stream().limit(Math.min(n, visibleCheckboxes.size())).map(webElement -> webElement.getAttribute("id")).collect(Collectors.toList());
     }
 }

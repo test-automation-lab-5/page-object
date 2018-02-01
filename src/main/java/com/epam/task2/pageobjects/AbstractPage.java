@@ -18,9 +18,12 @@ public abstract class AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-    protected void waitPageLoad(String pageUrl) {
+    protected void waitPageRedirectToURL(String pageUrl) {
         getWait().until((ExpectedCondition<Boolean>) wd ->
                 driver.getCurrentUrl().equals(pageUrl));
+    }
+
+    protected void waitPageLoad() {
         getWait().until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }

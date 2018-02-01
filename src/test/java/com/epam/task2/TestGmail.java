@@ -50,7 +50,7 @@ public class TestGmail {
         loginPage.typePassword(Preferences.preferencesTestGmail.getUserPassword());
         log.info("Wait mailbox load");
         MailboxPage mailboxPage = new MailboxPage(driver);
-        mailboxPage.waitPageLoad();
+        mailboxPage.waitMailboxPageLoad();
         log.info("Select 3 messages from inbox using checkboxes");
         List<String> deletedId = mailboxPage.checkNVisibleCheckboxes(Preferences.preferencesTestGmail.getElementsCount());
         log.info("Click on delete button");
