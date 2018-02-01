@@ -1,17 +1,13 @@
 package Task2;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
+import org.testng.annotations.*;
 import java.util.concurrent.TimeUnit;
-import static junit.framework.TestCase.assertNotNull;
+import static org.testng.Assert.fail;
+
 public class TestTask2 {
     private static WebDriver driver;
     private static String DRIVER_PATH = "src/test/resources/chromedriver.exe";
@@ -21,8 +17,6 @@ public class TestTask2 {
     private static String ADDRESSE = "kristinabilokura@gmail.com";
     private static String SUBJECT = "Selenium";
     private static String MESSAGE = "Test[0]";
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
     @BeforeClass
     public static void open() {
         System.setProperty("webdriver.chrome.driver",DRIVER_PATH);
@@ -30,7 +24,7 @@ public class TestTask2 {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     @Test
-    public void simpleLoginTest() throws InterruptedException {
+    public void simpleLoginTest()  throws InterruptedException {
         driver.get(URL);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.typeLogin(EMAIL);
@@ -44,17 +38,16 @@ public class TestTask2 {
         mainPage.typeContent(MESSAGE);
         mainPage.ready();
         mainPage.clicklinkSentMessage();
-        assertNotNull(mainPage.correct(ADDRESSE,driver));
+        Assert.assertNotNull(mainPage.correct(ADDRESSE,driver));
         Thread.sleep(1000);
         (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.elementToBeClickable(mainPage.getcheckboxVisible()));
         mainPage.clickchechbox();
         mainPage.clickDelete();
-        mainPage.clickOKButton();
         try {
             mainPage.correct(ADDRESSE,driver);
-            Assert.fail("expecting NoSuchElementException here");
-        } catch (Exception e) {
+            fail("FAIL");
+        } catch (Exception ex) {
         }
     }
     @AfterClass
