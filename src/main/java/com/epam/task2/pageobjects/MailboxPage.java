@@ -32,6 +32,10 @@ public class MailboxPage extends AbstractPage {
         return idList;
     }
 
+    public void waitPageLoad() {
+        waitPageLoad("https://mail.google.com/mail/#inbox");
+    }
+
     public void clickVisibleDeleteButton() {
         visibleDeleteButton.click();
     }
