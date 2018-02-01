@@ -19,7 +19,7 @@ public class WebDriverFactory {
             DesiredCapabilities capabilitiesFirefox = new DesiredCapabilities();
             capabilitiesFirefox.setCapability("marionette", false);
             webDriver = new FirefoxDriver(capabilitiesFirefox);
-        } else throw new IllegalArgumentException( "Invalid browser property set in configuration file" );
+        } else throw new IllegalArgumentException( "Invalid browser property" );
         return webDriver;
     }
 }
