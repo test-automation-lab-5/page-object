@@ -28,6 +28,11 @@ public abstract class AbstractPage {
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 
+    protected void waitUntilTrue(ExpectedCondition<Boolean> expectedCondition)
+    {
+        getWait().until(expectedCondition);
+    }
+
     protected WebElement waitUntilBeClickable(WebElement element) {
         return getWait().until(ExpectedConditions.elementToBeClickable(element));
     }

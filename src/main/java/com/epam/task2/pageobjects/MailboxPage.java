@@ -1,5 +1,6 @@
 package com.epam.task2.pageobjects;
 
+import com.epam.task2.preferences.Preferences;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,8 +17,6 @@ public class MailboxPage extends AbstractPage {
     private WebElement visibleDeleteButton;
     @FindBy(id = "link_undo")
     private WebElement undoLink;
-    @FindBy(xpath = "//div[@aria-live='assertive'][@aria-atomic='true']/div/div/span")
-    private WebElement undoDone;
 
 
     public MailboxPage(WebDriver driver) {
@@ -36,6 +35,7 @@ public class MailboxPage extends AbstractPage {
     }
 
     public void clickVisibleDeleteButton() {
+
         visibleDeleteButton.click();
     }
 
@@ -43,8 +43,8 @@ public class MailboxPage extends AbstractPage {
         waitUntilBeClickable(undoLink).click();
     }
 
-    public void waitUndoDone() {
-        waitUntilBeClickable(undoDone);
+    public void waitMessageBeRestored(List<String> deletedIdList) {
+        waitUntilTrue(f -> deletedIdList.equals(getIdsOfFirstNVisibleMails(Preferences.preferencesTestGmail.getElementsCount())));
     }
 
     public List<String> getIdsOfFirstNVisibleMails(int n) {

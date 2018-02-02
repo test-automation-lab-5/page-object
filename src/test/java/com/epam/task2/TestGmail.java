@@ -52,14 +52,14 @@ public class TestGmail {
         MailboxPage mailboxPage = new MailboxPage(driver);
         mailboxPage.waitMailboxPageLoad();
         log.info("Select 3 messages from inbox using checkboxes");
-        List<String> deletedId = mailboxPage.checkNVisibleCheckboxes(Preferences.preferencesTestGmail.getElementsCount());
+        List<String> deletedIdList = mailboxPage.checkNVisibleCheckboxes(Preferences.preferencesTestGmail.getElementsCount());
         log.info("Click on delete button");
         mailboxPage.clickVisibleDeleteButton();
         log.info("Click on undo button");
         mailboxPage.clickUndoLink();
         log.info("Verify that messages are not deleted");
-        mailboxPage.waitUndoDone();
-        Assert.assertTrue(mailboxPage.getIdsOfFirstNVisibleMails(Preferences.preferencesTestGmail.getElementsCount()).equals(deletedId));
+        mailboxPage.waitMessageBeRestored(deletedIdList);
+        Assert.assertTrue(mailboxPage.getIdsOfFirstNVisibleMails(Preferences.preferencesTestGmail.getElementsCount()).equals(deletedIdList));
     }
 
     @AfterClass
