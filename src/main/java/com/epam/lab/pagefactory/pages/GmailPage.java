@@ -26,10 +26,6 @@ public class GmailPage extends AbstractPage{
     private WebElement deleteButton;
     @FindBy(xpath = "//div[@role='alertdialog']//button[@name='ok']")
     private WebElement confirmDeleteButton;
-    @FindBy(xpath = "//span[@role='button'][@gh='mll']")
-    private WebElement moreButton;
-    @FindBy(xpath="//a[@href='https://mail.google.com/mail/u/0/#trash']")
-    private WebElement trashButton;
     @FindBy(xpath = "//span[@class='bofITb']")
     private WebElement movedToTrashMessage;
 
@@ -57,10 +53,8 @@ public class GmailPage extends AbstractPage{
         waitToBeClickable(checkbox);
         log.info("Opened sent folder");
         checkbox.click();
-        waitToBeClickable(deleteButton);
         log.info("Clicked on the checkbox");
-        waitToBeClickable(deleteButton).click();
-        log.info("Wait on removal");
+        deleteButton.click();
         confirmDeleteButton.click();
         log.info("Confirmed removal");
     }
