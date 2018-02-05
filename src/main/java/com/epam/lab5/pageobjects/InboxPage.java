@@ -1,5 +1,6 @@
 package com.epam.lab5.pageobjects;
 
+import com.epam.lab5.elements.PageElement;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ public class InboxPage extends AbstractPage {
     private static final Logger log = Logger.getLogger(InboxPage.class);
 
     @FindBy(css = ".aic .z0 div")
-    private WebElement composeButton;
+    private PageElement composeButton;
 
     public void clickComposeButton() {
         composeButton.click();
