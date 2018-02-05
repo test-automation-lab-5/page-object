@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mailComponent>
+    <tofield>ivanhorintest@gmail.com</tofield>
+    <subjectfield>Test Mail</subjectfield>
+    <messagefield>Some Text.</messagefield>
+</mailComponent>
