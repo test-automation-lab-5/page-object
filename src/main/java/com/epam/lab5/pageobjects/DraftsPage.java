@@ -17,9 +17,6 @@ public class DraftsPage extends AbstractPage {
 
     private WebElement draftMailWithSubject;
 
-    public DraftsPage(WebDriver driver) {
-        super(driver);
-    }
 
     public void openDraftsPage(){
         waitDraftsButtonVisibility();

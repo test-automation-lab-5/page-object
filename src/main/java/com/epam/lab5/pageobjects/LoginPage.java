@@ -1,5 +1,7 @@
 package com.epam.lab5.pageobjects;
 
+import com.epam.lab5.elements.Name;
+import com.epam.lab5.elements.PageElement;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -11,27 +13,32 @@ public class LoginPage extends AbstractPage {
     private static final Logger log = Logger.getLogger(LoginPage.class);
 
     @FindBy(name = "identifier")
-    private WebElement emailInput;
+    @Name("Email input")
+    private PageElement emailInput;
 
     @FindBy(name="password")
-    private WebElement passwordInput;
+    @Name("Password input")
+    private PageElement passwordInput;
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
+    @FindBy(name = "asfasdfsdfasdfasd")
+    @Name("Unexisting element")
+    private PageElement unexistingElement;
+
+
 
     public void openLoginPage(String loginPageLink){
         driver.get(loginPageLink);
-        log.info("Link was got.");
     }
 
     public void enterEmail(String email){
         emailInput.sendKeys(email+Keys.ENTER);
-        log.info("eMail was submited.");
     }
 
     public void enterPassword(String password){
         passwordInput.sendKeys(password+Keys.ENTER);
-        log.info("Password was submited.");
+    }
+
+    public boolean exists () {
+        return unexistingElement.exists();
     }
 }

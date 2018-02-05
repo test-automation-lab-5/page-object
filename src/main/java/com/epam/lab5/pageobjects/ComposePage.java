@@ -26,9 +26,6 @@ public class ComposePage extends AbstractPage {
     private WebElement composeWindowCloseButton;
 
 
-    public ComposePage(WebDriver driver) {
-        super(driver);
-    }
 
     public void enterMailTo(String mailTo){
         mailToInput.sendKeys(mailTo);

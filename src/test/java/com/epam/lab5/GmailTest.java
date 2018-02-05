@@ -33,17 +33,11 @@ public class GmailTest{
     public void setUp() throws IOException {
         DriverDataReader driverDataReader = new DriverDataReader();;
         System.setProperty(driverDataReader.getChromeDriver(),driverDataReader.getDriverPath());
-        driver = new ChromeDriver(){
-            {
-                manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-            }
 
-        };
-
-        loginPage = new LoginPage(driver);
-        inboxPage = new InboxPage(driver);
-        composePage = new ComposePage(driver);
-        draftsPage = new DraftsPage(driver);
+        loginPage = new LoginPage();
+        inboxPage = new InboxPage();
+        composePage = new ComposePage();
+        draftsPage = new DraftsPage();
         loginDataReader=new LoginDataReader();
         testDataReader=new TestDataReader();
     }
@@ -53,6 +47,13 @@ public class GmailTest{
         loginPage.openLoginPage(loginDataReader.getMailLink());
         loginPage.enterEmail(loginDataReader.getMailAddress());
         loginPage.enterPassword(loginDataReader.getMailPassword());
+
+        System.out.println(loginPage.exists());
+
+
+
+
+
         inboxPage.clickComposeButton();
         composePage.enterMailTo(testDataReader.getToFieldValue());
         composePage.enterMailSubject(testDataReader.getSubjectFieldValue());

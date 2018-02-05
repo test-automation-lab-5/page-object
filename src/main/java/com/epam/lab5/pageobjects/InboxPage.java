@@ -16,8 +16,4 @@ public class InboxPage extends AbstractPage {
         composeButton.click();
         log.info("Compose button was clicked.");
     }
-
-    public InboxPage(WebDriver driver) {
-        super(driver);
-    }
 }
